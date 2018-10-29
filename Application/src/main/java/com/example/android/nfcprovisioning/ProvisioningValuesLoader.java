@@ -155,18 +155,53 @@ public class ProvisioningValuesLoader extends AsyncTaskLoader<Map<String, String
     private void loadSystemValues(HashMap<String, String> values) {
         Context context = getContext();
         //noinspection deprecation
-        putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_PACKAGE_NAME,
-                "com.example.android.deviceowner");
+        /*putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_PACKAGE_NAME,
+                "com.afwsamples.testdpc");
         if (Build.VERSION.SDK_INT >= 23) {
             putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME,
-                    "com.example.android.deviceowner/.DeviceOwnerReceiver");
+                    "com.afwsamples.testdpc/com.afwsamples.testdpc.DeviceAdminReceiver");
+            putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION,
+                    "https://testdpc-latest-apk.appspot.com");
+            putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_SIGNATURE_CHECKSUM,
+                    "gJD2YwtOiWJHkSMkkIfLRlj-quNqG1fb6v100QmzM9w=");
+            putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_SKIP_ENCRYPTION,
+                    "true");
+        }*/
+
+        putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_PACKAGE_NAME,
+                "com.afwsamples.testdpc");
+        if (Build.VERSION.SDK_INT >= 23) {
+            putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME,
+                    "com.afwsamples.testdpc/com.afwsamples.testdpc.DeviceAdminReceiver");
+            putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION,
+                    "http://52.9.54.230/NFC/dpc.apk");
+//            putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION,
+//                    "http://192.168.100.20:8383/zubair/android6/dpc.apk");
+            putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_SIGNATURE_CHECKSUM,
+                    "HUWAKsNQ3cj4O7MHeLyskMYrQgR86QykJKR-o5RHrjQ=");
+            putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_SKIP_ENCRYPTION, "true");
+            putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_LEAVE_ALL_SYSTEM_APPS_ENABLED, "true");
         }
+        /*putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_PACKAGE_NAME,
+                "com.google.android.apps.work.clouddpc");
+        if (Build.VERSION.SDK_INT >= 23) {
+            putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME,
+                    "com.google.android.apps.work.clouddpc/.receivers.CloudDeviceAdminReceiver");
+            putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION,
+                    "https://play.google.com/managed/downloadManagingApp?identifier=setup");
+            putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_SIGNATURE_CHECKSUM,
+                    "I5YvS0O5hXY46mb01BlRjq4oJJGs2kuUcHvVkAPEXlg");
+        }*/
+
         putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_LOCALE,
                 CompatUtils.getPrimaryLocale(context.getResources().getConfiguration()).toString());
         putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_TIME_ZONE,
                 TimeZone.getDefault().getID());
+//        putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_WIFI_SECURITY_TYPE, "WPA");
+//        putIfMissing(values, DevicePolicyManager.EXTRA_PROVISIONING_WIFI_PASSWORD, "987654321c");
+
         if (!values.containsKey(DevicePolicyManager.EXTRA_PROVISIONING_WIFI_SSID)) {
-            WifiManager wifiManager = (WifiManager) context
+            WifiManager wifiManager = (WifiManager) context.getApplicationContext()
                     .getSystemService(Activity.WIFI_SERVICE);
             WifiInfo info = wifiManager.getConnectionInfo();
             if (info.getNetworkId() != -1) { // Connected to network

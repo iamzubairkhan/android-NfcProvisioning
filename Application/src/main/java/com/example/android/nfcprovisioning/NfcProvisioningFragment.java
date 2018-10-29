@@ -35,6 +35,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.example.android.common.logger.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Map;
@@ -65,7 +67,7 @@ public class NfcProvisioningFragment extends Fragment implements
     private EditText mEditWifiPassword;
 
     // Values to be set via NFC bump
-    private Map<String, String> mProvisioningValues;
+    private static Map<String, String> mProvisioningValues;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -94,6 +96,8 @@ public class NfcProvisioningFragment extends Fragment implements
         mEditWifiPassword.addTextChangedListener(new TextWatcherWrapper(R.id.wifi_password, this));
         // Prior to API 23, the class name is not needed
         mEditClassName.setVisibility(Build.VERSION.SDK_INT >= 23 ? View.VISIBLE : View.GONE);
+        //temporary
+        mEditClassName.setVisibility(View.GONE);
     }
 
     @Override
@@ -109,6 +113,10 @@ public class NfcProvisioningFragment extends Fragment implements
 
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
+        return getNdefMessage();
+    }
+
+    public static NdefMessage getNdefMessage(){
         if (mProvisioningValues == null) {
             return null;
         }
@@ -142,7 +150,8 @@ public class NfcProvisioningFragment extends Fragment implements
                     String.valueOf(System.currentTimeMillis()));
         }
         try {
-            properties.store(stream, getString(R.string.nfc_comment));
+            properties.store(stream, "NFC provisioning sample");
+            Log.v("SizeOfPayload: ", "" + stream.size());
             NdefRecord record = NdefRecord.createMime(
                     DevicePolicyManager.MIME_TYPE_PROVISIONING_NFC, stream.toByteArray());
             return new NdefMessage(new NdefRecord[]{record});

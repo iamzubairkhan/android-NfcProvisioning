@@ -30,7 +30,8 @@ limitations under the License.
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small"
             android:hint="@string/hint_package_name"
-            android:inputType="textNoSuggestions"/>
+            android:inputType="textNoSuggestions"
+            android:visibility="gone"/>
 
         <EditText
             android:id="@+id/class_name"
@@ -38,7 +39,8 @@ limitations under the License.
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small"
             android:hint="@string/hint_class_name"
-            android:inputType="textNoSuggestions"/>
+            android:inputType="textNoSuggestions"
+            android:visibility="gone"/>
 
         <EditText
             android:id="@+id/locale"

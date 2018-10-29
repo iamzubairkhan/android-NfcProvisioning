@@ -23,7 +23,8 @@ limitations under the License.
     <string name="hint_locale">Locale</string>
     <string name="hint_timezone">Timezone</string>
     <string name="hint_wifi_ssid">WiFi SSID</string>
-    <string name="hint_wifi_security_type">WiFi security type</string>
+    <string name="hint_wifi_security_type">WiFi security type: WPA, WEP or NONE</string>
     <string name="hint_wifi_password">WiFi password</string>
+    <string name="message_tag_detected">Tag Detected !</string>
 
 </resources>

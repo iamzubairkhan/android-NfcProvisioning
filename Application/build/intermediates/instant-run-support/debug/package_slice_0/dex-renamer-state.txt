@@ -1,0 +1,4 @@
+#Sat Oct 27 17:25:09 PKT 2018
+base.0=D\:\\NfcExample\\android-NfcProvisioning\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\57
+path.0=classes.dex
+renamed.0=classes.dex
